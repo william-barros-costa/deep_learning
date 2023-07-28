@@ -5,14 +5,14 @@ import numpy as np
 from numbers import Number
 from dataclasses import dataclass, field
 from ..exceptions.exceptions import ArrayMismatchException
-from typing import Union
+from typing import List
 
 @dataclass
 class Perceptron:
     """
         The simplest form of a Neural Network
     """
-    weigths: np.ndarray | list = field(default_factory=list)
+    weigths: List[Number] = field(default_factory=list)
     bias: Number = 0
 
     def __post_init__(self):
@@ -20,7 +20,7 @@ class Perceptron:
             Converts weights variable to numpy.ndarray if needed.
         """
 
-        if isinstance(self.weigths, list):
+        if not isinstance(self.weigths, np.ndarray):
             self.weigths = np.array(self.weigths)
         
 
