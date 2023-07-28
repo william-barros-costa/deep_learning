@@ -24,7 +24,7 @@ class Perceptron:
             self.weigths = np.array(self.weigths)
         
 
-    def compute(self, X: np.ndarray | list):
+    def predict(self, X: np.ndarray | list):
         if isinstance(X, list):
             X= np.array(X)
 

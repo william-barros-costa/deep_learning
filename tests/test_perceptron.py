@@ -32,11 +32,11 @@ class TestPerceptron(unittest.TestCase):
         assert_equal(perceptron.weigths, empty_array, "Numpy Arrays are not equal.")
 
         with self.assertRaises(ArrayMismatchException, msg="Array Match is not being checked."):
-            perceptron.compute(wrong_array)
+            perceptron.predict(wrong_array)
 
-        self.assertEqual(perceptron.compute([]), 3, "Compute is not taking bias into consideration.")
+        self.assertEqual(perceptron.predict([]), 3, "Compute is not taking bias into consideration.")
 
-        self.assertEqual(second_perceptron.compute(X), -6, "Compute matrix multiplication is failing.")
+        self.assertEqual(second_perceptron.predict(X), -6, "Compute matrix multiplication is failing.")
 
         
 
