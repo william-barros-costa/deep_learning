@@ -4,6 +4,7 @@
 import numpy as np
 import unittest
 from wcode.neural_network.perceptron import Perceptron
+from numpy.testing import assert_equal
 
 
 class TestPerceptron(unittest.TestCase):
@@ -17,7 +18,9 @@ class TestPerceptron(unittest.TestCase):
         """
         perceptron = Perceptron()
         self.assertEqual(type(perceptron), Perceptron, 'Simple Initialization has failed')
-        self.assertEqual(perceptron.weigths, np.array([]),)
+        self.assertEqual(type(perceptron.weigths), type(np.array([])), "List was not converted to Numpy array")
+
+        assert_equal(perceptron.weigths, np.array([1]), "Numpy Arrays are not equal")
 
 
 if __name__ == "__main__":
