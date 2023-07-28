@@ -16,12 +16,18 @@ class Perceptron:
     bias: Number = 0
 
     def __post_init__(self):
-        print('Hello')
+        """
+            Converts weights variable to numpy.ndarray if needed.
+        """
+
         if isinstance(self.weigths, list):
             self.weigths = np.array(self.weigths)
         
 
-    def compute(self, X: np.array):
+    def compute(self, X: np.ndarray | list):
+        if isinstance(X, list):
+            X= np.array(X)
+
         if X.shape != self.weigths.shape:
             raise ArrayMismatchException(X, self.weigths)
         

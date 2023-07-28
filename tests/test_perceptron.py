@@ -4,6 +4,7 @@
 import numpy as np
 import unittest
 from wcode.neural_network.perceptron import Perceptron
+from wcode.neural_network.perceptron import ArrayMismatchException
 from numpy.testing import assert_equal
 
 
@@ -16,12 +17,28 @@ class TestPerceptron(unittest.TestCase):
         """
         Tests the perceptrons ability to calculate to pass information
         """
-        perceptron = Perceptron()
-        self.assertEqual(type(perceptron), Perceptron, 'Simple Initialization has failed')
-        self.assertEqual(type(perceptron.weigths), type(np.array([])), "List was not converted to Numpy array")
+        empty_array = np.array([])
+        wrong_array = [1]
+        weigths = [1, -2, 0, 4]
+        X = [4, 5, -1, 0]
+        bias=3
+        second_bias = 0
 
-        assert_equal(perceptron.weigths, np.array([1]), "Numpy Arrays are not equal")
+        perceptron = Perceptron(bias=bias)
+        second_perceptron = Perceptron(weigths, second_bias)
 
+        self.assertEqual(type(perceptron), Perceptron, 'Simple Initialization has failed.')
+        self.assertEqual(type(perceptron.weigths), type(np.array([])), "List was not converted to Numpy array.")
+        assert_equal(perceptron.weigths, empty_array, "Numpy Arrays are not equal.")
+
+        with self.assertRaises(ArrayMismatchException, msg="Array Match is not being checked."):
+            perceptron.compute(wrong_array)
+
+        self.assertEqual(perceptron.compute([]), 3, "Compute is not taking bias into consideration.")
+
+        self.assertEqual(second_perceptron.compute(X), -6, "Compute matrix multiplication is failing.")
+
+        
 
 if __name__ == "__main__":
-    unittest.main(warnings="ignore")
+    unittest.main()
