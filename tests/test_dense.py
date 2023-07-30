@@ -8,8 +8,11 @@ import unittest
 class TestDense(unittest.TestCase):
 
     def test(self):
-        number_of_neurons = 3
         perceptrons = [Perceptron(), Perceptron(), Perceptron()]
+        number_of_neurons = 3
+        arguments = [1,2,3]
+        result = sum(arguments)
+        bias = 1.5
 
         with self.assertRaises(NoArgumentChosenException):
             dense = Dense()
@@ -19,4 +22,8 @@ class TestDense(unittest.TestCase):
 
         dense1 = Dense(neurons=perceptrons)
         self.assertEqual(dense1.shape, number_of_neurons, "Number of Perceptrons by providing argument neurons is not the expected value")
+
+        dense2 = Dense(number_of_neurons)
+        self.assertEqual(dense2.compute(arguments), result, "")
+        
 
